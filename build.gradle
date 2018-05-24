@@ -1,0 +1,52 @@
+group 'CodeRetreatMultiProjectGradle'
+version '1.0-SNAPSHOT'
+
+
+allprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    task hello {
+        doLast {
+            task -> println "I'm $task.project.name"
+        }
+    }
+
+}
+
+task hello2 {
+    println "hallo"
+}
+
+task hello3 {
+    println "hallo"
+}
+subprojects {
+    hello {
+        doLast {
+            println "- I am a subproject"
+        }
+    }
+}
+
+project(':FizzBuzz').hello {
+    doLast {
+        println "- I am special"
+    }
+}
+configure(subprojects.findAll { it.name != 'FizzBuzz' }) {
+    hello {
+        doLast {
+            println "- Hey, I'm not FizzBuzz"
+        }
+    }
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.assertj:assertj-core:3.8.0'
+}
