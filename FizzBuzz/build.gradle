@@ -1,9 +1,6 @@
 group 'CodeRetreatMultiProjectGradle'
 version '1.0-SNAPSHOT'
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
 
 hello.doLast{
     println "- I'm very special special in subproject"
